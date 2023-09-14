@@ -1,0 +1,151 @@
+@font-face {
+    font-family: 'Ubuntu-bold';
+    src: url("fonts/Ubuntu-Bold.ttf");
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url("fonts/Ubuntu-Regular.ttf");
+}
+
+body {
+    padding-top: 3rem;
+    background-color: #131417;
+}
+
+h1 {
+    font-size: 3rem;
+    text-align: center;
+    color: #d5d7de;
+    margin-left: 20px;
+    font-family: Ubuntu-bold;
+}
+
+h2 {
+    font-size: 2rem;
+    text-align: center;
+    color: #d5d7de;
+    margin-left: 20px;
+    font-family: Ubuntu-bold;
+}
+
+h3 {
+    font-size: 1rem;
+    text-align: center;
+    color: #d5d7de;
+    margin-left: 20px;
+    font-family: Ubuntu-bold;
+}
+
+p {
+    font-size: 1rem;
+    text-align: center;
+    color: #d5d7de;
+    font-family: Ubuntu;
+}
+
+.flex {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#RadioCard {
+    position: relative;
+    border: 2px solid white;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    background-color: #202225;
+    overflow: hidden;
+    height: 22vw;
+    max-width: 750px;
+    min-width: 350px;
+    min-height: 425px;
+    width: 750px;
+}
+
+#playbtn {
+    background-color: #dce4dd;
+    border: none;
+    color: #131417;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    margin-top: 20px;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#playbtn:hover {
+    background-color: #ffffffe8;
+}
+
+
+.visualizer-container {
+    max-width: unset;
+    position: absolute;
+    display: block;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
+    align-items: center;
+}
+
+.visualizer-container__bar {
+
+    display: inline-block;
+    background: white;
+    margin: 0 2px;
+    width: 5px;
+    max-width: 10%;
+    max-height: 17%;
+    align-items: center;
+
+}
+
+@media only screen and (max-width: 525px) {
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .visualizer-container {
+        max-width: unset;
+        position: absolute;
+        display: block;
+        bottom: 0;
+        width: 100%;
+        white-space: nowrap;
+        text-align: center;
+        align-items: center;
+    }
+
+    .visualizer-container__bar {
+        max-width: 3px;
+        min-width: unset;
+        width: 3px;
+    }
+}

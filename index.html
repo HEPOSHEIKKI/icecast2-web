@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <!-- Primary Meta Tags -->
+    <title>Icecast2 web player</title>
+    <meta charset="utf-8">
+    <meta name="title" content="Icecast2" />
+
+    <!-- Meta Tags Generated with https://metatags.io -->
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div>
+        <h1>ICECAST2 WEB PLAYER</h1>
+        <p>24/7 RADIO FOR YOUR LISTENING PLEASURE</p>
+    </div>
+    <div class="flex">
+        <div id="RadioCard">
+            <h2>NOW PLAYING</h2>
+            <h3 id="songTitle"></h3>
+            <p>&nbsp</p>
+            <button id="playbtn">
+                <svg id="playicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+                    <path d="M22 14 L50 32 L22 50 z" fill="#000" />
+                </svg>
+                <svg id="pauseicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+                    <rect x="18" y="14" width="12" height="36" fill="#000" />
+                    <rect x="34" y="14" width="12" height="36" fill="#000" />
+                </svg>
+
+            </button>
+            <audio id="audioplayer" crossorigin="anonymous" src="https://example.com/stream.mp3"
+                type="audio/mpeg">Your shit-ass browser
+                doesn't support the audio element</audio>
+            <p>&nbsp</p>
+            <p>&nbsp</p>
+            <p>&nbsp</p>
+            <p>&nbsp</p>
+            <p>&nbsp</p>
+            <div class="visualizer-container"></div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+    let isplaying = false;
+    const playButton = document.getElementById('playbtn');
+    const audioPlayer = document.getElementById('audioplayer');
+    const playIcon = document.getElementById('playicon');
+    const pauseIcon = document.getElementById('pauseicon');
+    pauseIcon.style.display = "none";
+
+    (function () {
+        const MAX_BAR_HEIGHT = 150;
+        const NBR_OF_BARS = 50;
+
+        const audio = document.querySelector("audio");
+        const ctx = new AudioContext();
+        const audioSource = ctx.createMediaElementSource(audio);
+
+        const analayzer = ctx.createAnalyser();
+
+        audioSource.connect(analayzer);
+        audioSource.connect(ctx.destination);
+
+        const frequencyData = new Uint8Array(analayzer.frequencyBinCount);
+        analayzer.getByteFrequencyData(frequencyData);
+        console.log("frequencyData", frequencyData);
+
+        const visualizerContainer = document.querySelector(".visualizer-container");
+
+        for (let i = 0; i < NBR_OF_BARS; i++) {
+
+            const bar = document.createElement("DIV");
+            bar.setAttribute("id", "bar" + i);
+            bar.setAttribute("class", "visualizer-container__bar");
+            visualizerContainer.appendChild(bar);
+
+        }
+
+        function renderFrame() {
+            analayzer.getByteFrequencyData(frequencyData);
+
+            for (let i = 0; i < NBR_OF_BARS; i++) {
+                const index = (i + 10) * 2;
+                const fd = frequencyData[index];
+                const bar = document.querySelector("#bar" + i);
+                if (!bar) {
+                    continue;
+                }
+                const barHeight = Math.max(4, fd || 0);
+                const scaledBarHeight = (barHeight / 255) * MAX_BAR_HEIGHT;
+                bar.style.height = scaledBarHeight + "px";
+
+
+            }
+            window.requestAnimationFrame(renderFrame);
+
+        }
+
+        renderFrame();
+
+        audio.volume = 0.5;
+
+
+    })();
+
+    firstClick = new Boolean(true);
+
+    playButton.addEventListener('click', () => {
+        if (audioPlayer.volume == 0.0) {
+            if (firstClick) {
+                audioPlayer.load();
+                audioPlayer.play();
+                firstClick = false;
+            }
+            audioPlayer.volume = 1.0;
+            playIcon.style.display = "none";
+            pauseIcon.style.display = "inline";
+
+        } else {
+            audioPlayer.volume = 0.0;
+            pauseIcon.style.display = "none";
+            playIcon.style.display = "inline";
+        }
+    });
+
+    function updateSongTitle() {
+        fetch('https://example.com/status-json.xsl')
+            .then(response => response.json())
+            .then(jsonData => {
+                const songTitle = jsonData.icestats.source.title;
+                const songTitleElement = document.getElementById('songTitle');
+                songTitleElement.textContent = songTitle;
+            })
+            .catch(error => console.error('Error fetching JSON:', error));
+    }
+    updateSongTitle();
+    setInterval(updateSongTitle, 10000);
+
+
+
+
+</script>
