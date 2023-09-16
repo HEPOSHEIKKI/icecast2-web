@@ -134,15 +134,29 @@
         }
     });
 
+
     function updateSongTitle() {
         fetch('https://example.com/status-json.xsl')
             .then(response => response.json())
             .then(jsonData => {
-                const songTitle = jsonData.icestats.source.title;
+                songTitle = jsonData.icestats.source.title;
                 const songTitleElement = document.getElementById('songTitle');
                 songTitleElement.textContent = songTitle;
+
+                const [artist, song] = songTitle.split(' - ');
+
+                if ("mediaSession" in navigator) {
+                    navigator.mediaSession.metadata = new MediaMetadata({
+                        title: song,
+                        artist: artist,
+                        album: "Icecast 2",
+                        artwork: [{ src: "mediasession.png" }],
+                    });
+                }
+
             })
             .catch(error => console.error('Error fetching JSON:', error));
+
     }
     updateSongTitle();
     setInterval(updateSongTitle, 10000);
