@@ -24,7 +24,7 @@ A modern, web based icecast2 stream player.
 ## Usage
 
 - Just clone and copy onto your web server
-- Make sure you set your `burst-size` to `131070` or higher in your `/etc/icecast2/icecast.xml`, not doing this will cause chromium to load for around 10 seconds before actually starting playback (thank chromium)
+- Make sure you set your `burst-size` to `131070` or higher in your `/etc/icecast2/icecast.xml`, not doing this will cause chromium to load for around 10 seconds before actually starting playback (thanks chromium)
 
 ## Screenshots
 
