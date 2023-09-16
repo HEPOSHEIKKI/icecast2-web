@@ -34,7 +34,7 @@
                 </svg>
 
             </button>
-            <audio id="audioplayer" crossorigin="anonymous" src="https://backend.radio.kotikone.xyz/stream.mp3" //Change this for your publish URL
+            <audio id="audioplayer" crossorigin="anonymous" src="https://backend.radio.kotikone.xyz/stream.mp3" //CHANGE ME
                 type="audio/mpeg">Your shit ass browser
                 doesn't support the audio element</audio>
             <p>&nbsp</p>
@@ -51,7 +51,6 @@
 
 <script>
 
-    firstClick = new Boolean(true);
     let isplaying = false;
     const playButton = document.getElementById('playbtn');
     const audioPlayer = document.getElementById('audioplayer');
@@ -60,33 +59,31 @@
     pauseIcon.style.display = "none";
 
     (function () {
-        if (!firstClick){
-            const MAX_BAR_HEIGHT = 150;
-            const NBR_OF_BARS = 50;
+        const MAX_BAR_HEIGHT = 150;
+        const NBR_OF_BARS = 50;
 
-            const audio = document.querySelector("audio");
-            const ctx = new AudioContext();
-            const audioSource = ctx.createMediaElementSource(audio);
+        const audio = document.querySelector("audio");
+        const ctx = new AudioContext();
+        const audioSource = ctx.createMediaElementSource(audio);
 
-            const analayzer = ctx.createAnalyser();
+        const analayzer = ctx.createAnalyser();
 
-            audioSource.connect(analayzer);
-            audioSource.connect(ctx.destination);
+        audioSource.connect(analayzer);
+        audioSource.connect(ctx.destination);
 
-            const frequencyData = new Uint8Array(analayzer.frequencyBinCount);
-            analayzer.getByteFrequencyData(frequencyData);
-            console.log("frequencyData", frequencyData);
+        const frequencyData = new Uint8Array(analayzer.frequencyBinCount);
+        analayzer.getByteFrequencyData(frequencyData);
+        console.log("frequencyData", frequencyData);
 
-            const visualizerContainer = document.querySelector(".visualizer-container");
+        const visualizerContainer = document.querySelector(".visualizer-container");
 
-            for (let i = 0; i < NBR_OF_BARS; i++) {
+        for (let i = 0; i < NBR_OF_BARS; i++) {
 
-                const bar = document.createElement("DIV");
-                bar.setAttribute("id", "bar" + i);
-                bar.setAttribute("class", "visualizer-container__bar");
-                visualizerContainer.appendChild(bar);
+            const bar = document.createElement("DIV");
+            bar.setAttribute("id", "bar" + i);
+            bar.setAttribute("class", "visualizer-container__bar");
+            visualizerContainer.appendChild(bar);
 
-            }
         }
 
         function renderFrame() {
@@ -109,15 +106,14 @@
 
         }
 
-        if(!firstClick){
-            renderFrame();
-            audio.volume = 1.0;
-        }
+        renderFrame();
 
+        audio.volume = 0.5;
 
 
     })();
 
+    firstClick = new Boolean(true);
 
     playButton.addEventListener('click', () => {
         if (audioPlayer.volume == 0.0 || firstClick) {
@@ -139,7 +135,7 @@
 
 
     function updateSongTitle() {
-        fetch('https://backend.radio.kotikone.xyz/status-json.xsl') //Change this URL to your server
+        fetch('https://backend.radio.kotikone.xyz/status-json.xsl') //CHANGE ME!
             .then(response => response.json())
             .then(jsonData => {
                 songTitle = jsonData.icestats.source.title;
@@ -147,7 +143,7 @@
                 songTitleElement.textContent = songTitle;
 
                 const [artist, song] = songTitle.split(' - ');
-                
+
                 if ("mediaSession" in navigator) {
                     navigator.mediaSession.metadata = new MediaMetadata({
                         title: song,
