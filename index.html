@@ -117,7 +117,7 @@
     firstClick = new Boolean(true);
 
     playButton.addEventListener('click', () => {
-        if (audioPlayer.volume == 0.0) {
+        if (audioPlayer.volume == 0.0 || firstClick) {
             if (firstClick) {
                 audioPlayer.load();
                 audioPlayer.play();
