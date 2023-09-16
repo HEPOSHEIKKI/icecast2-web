@@ -28,8 +28,9 @@ A modern, web based icecast2 stream player.
 
 ## Screenshots
 
-![App Screenshot](https://github.com/HEPOSHEIKKI/icecast2-web/assets/51783206/f2a49e0c-c99a-4125-bcbf-14ba503e6703)
+![App screenshot](https://github.com/HEPOSHEIKKI/icecast2-web/assets/51783206/31659f19-3c56-4aed-b6ac-0d4ff57ffbbf)
 
-![System media control in KDE Plasma](https://github.com/HEPOSHEIKKI/icecast2-web/assets/51783206/a5b1589f-4d7a-4beb-9e32-967824a8b4e7)
+![System media controls in KDE PLASMA](https://github.com/HEPOSHEIKKI/icecast2-web/assets/51783206/4835eea3-3851-4385-8e81-7deefc4891df)
+
 
 
