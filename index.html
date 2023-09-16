@@ -4,23 +4,8 @@
 
 <head>
     <!-- Primary Meta Tags -->
-    <title>Pirate Radio | Kotikone</title>
+    <title>Icecast2 WEB</title>
     <meta charset="utf-8">
-    <meta name="title" content="Pirate Radio | Kotikone" />
-    <meta name="description" content="24/7 pirate tunes brought to you by kotikone. Ahoy, music enthusiasts, a sonic voyage awaits! Now featurng a waveform visualizer and a responsive mobile site (kill me)" />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://radio.kotikone.xyz" />
-    <meta property="og:title" content="Pirate Radio | Kotikone" />
-    <meta property="og:description" content="24/7 pirate tunes brought to you by kotikone. Ahoy, music enthusiasts, a sonic voyage awaits!" />
-    <meta property="og:image" content="/logo-1k.png" />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="Pirate Radio | Kotikone" />
-    <meta property="twitter:description" content="24/7 pirate tunes brought to you by kotikone. Ahoy, music enthusiasts, a sonic voyage awaits!" />
-    <meta property="twitter:image" content="https://radio.kotikone.xyz/logo-1k.png" />
 
     <!-- Meta Tags Generated with https://metatags.io -->
     <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
@@ -31,8 +16,8 @@
 
 <body>
     <div>
-        <h1>KOTIKONE PIRATE RADIO</h1>
-        <p>24/7 TECHNO PIRATE RADIO FOR YOUR LISTENING PLEASURE</p>
+        <h1>ICECAST2 WEB PLAYER</h1>
+        <p>24/7 RADIO FOR YOUR LISTENING PLEASURE</p>
     </div>
     <div class="flex">
         <div id="RadioCard">
@@ -49,7 +34,7 @@
                 </svg>
 
             </button>
-            <audio id="audioplayer" crossorigin="anonymous" src="https://backend.radio.kotikone.xyz/stream.mp3"
+            <audio id="audioplayer" crossorigin="anonymous" src="https://backend.radio.kotikone.xyz/stream.mp3" //Change this for your publish URL
                 type="audio/mpeg">Your shit ass browser
                 doesn't support the audio element</audio>
             <p>&nbsp</p>
@@ -154,7 +139,7 @@
 
 
     function updateSongTitle() {
-        fetch('https://backend.radio.kotikone.xyz/status-json.xsl')
+        fetch('https://backend.radio.kotikone.xyz/status-json.xsl') //Change this URL to your server
             .then(response => response.json())
             .then(jsonData => {
                 songTitle = jsonData.icestats.source.title;
